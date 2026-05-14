@@ -43,21 +43,25 @@ function setLoading(isLoading) {
 /* ===== Supabase Operations ===== */
 async function loadState() {
   setLoading(true);
-  const { data, error } = await db
-    .from('cards')
-    .select('*')
-    .order('position', { ascending: true });
-  setLoading(false);
+  try {
+    const { data, error } = await db
+      .from('cards')
+      .select('*')
+      .order('position', { ascending: true });
 
-  if (error) {
-    showToast('데이터를 불러오지 못했습니다: ' + error.message, true);
-    return;
+    if (error) throw error;
+
+    COLUMNS.forEach(col => { state[col] = []; });
+    data.forEach(row => {
+      if (state[row.column_name] !== undefined) {
+        state[row.column_name].push({ id: row.id, text: row.text, createdAt: row.created_at });
+      }
+    });
+  } catch (e) {
+    showToast('데이터를 불러오지 못했습니다: ' + (e.message ?? ''), true);
+  } finally {
+    setLoading(false);
   }
-
-  COLUMNS.forEach(col => { state[col] = []; });
-  data.forEach(row => {
-    state[row.column_name].push({ id: row.id, text: row.text, createdAt: row.created_at });
-  });
 }
 
 async function addCard(col, text) {
