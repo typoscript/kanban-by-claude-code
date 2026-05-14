@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kanban Board</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,400,0,0" rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <header class="app-bar">
+    <span class="material-symbols-rounded app-bar__icon">view_kanban</span>
+    <h1 class="app-bar__title">Kanban Board</h1>
+  </header>
+
+  <main class="board">
+
+    <!-- Todo -->
+    <section class="column" data-column="todo" id="col-todo">
+      <div class="column__header">
+        <span class="material-symbols-rounded column__icon">check_box_outline_blank</span>
+        <h2 class="column__title">Todo</h2>
+        <span class="column__count badge">0</span>
+      </div>
+      <div class="column__cards" id="cards-todo" data-column="todo" role="list"></div>
+      <button class="add-card-btn" data-column="todo" aria-label="Todo 카드 추가">
+        <span class="material-symbols-rounded">add</span>
+        카드 추가
+      </button>
+    </section>
+
+    <!-- In Progress -->
+    <section class="column" data-column="in-progress" id="col-in-progress">
+      <div class="column__header">
+        <span class="material-symbols-rounded column__icon">pending</span>
+        <h2 class="column__title">In Progress</h2>
+        <span class="column__count badge">0</span>
+      </div>
+      <div class="column__cards" id="cards-in-progress" data-column="in-progress" role="list"></div>
+      <button class="add-card-btn" data-column="in-progress" aria-label="In Progress 카드 추가">
+        <span class="material-symbols-rounded">add</span>
+        카드 추가
+      </button>
+    </section>
+
+    <!-- Done -->
+    <section class="column" data-column="done" id="col-done">
+      <div class="column__header">
+        <span class="material-symbols-rounded column__icon">task_alt</span>
+        <h2 class="column__title">Done</h2>
+        <span class="column__count badge">0</span>
+      </div>
+      <div class="column__cards" id="cards-done" data-column="done" role="list"></div>
+      <button class="add-card-btn" data-column="done" aria-label="Done 카드 추가">
+        <span class="material-symbols-rounded">add</span>
+        카드 추가
+      </button>
+    </section>
+
+  </main>
+
+  <!-- Add Card Modal -->
+  <div id="card-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-surface">
+      <div class="modal-header">
+        <h3 id="modal-title">새 카드</h3>
+        <button class="icon-btn" id="modal-close" aria-label="닫기">
+          <span class="material-symbols-rounded">close</span>
+        </button>
+      </div>
+      <textarea id="card-input" rows="4" placeholder="할 일을 입력하세요... (Enter로 추가, Shift+Enter로 줄바꿈)" maxlength="280"></textarea>
+      <div class="char-count"><span id="char-current">0</span> / 280</div>
+      <div class="modal-actions">
+        <button class="btn btn--text" id="modal-cancel">취소</button>
+        <button class="btn btn--contained" id="modal-confirm">추가</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 로컬 개발용: config.local.js 는 .gitignore 에 포함됨 (배포 시 자동 제거) -->
+  <script src="./config.local.js" onerror="void 0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>
