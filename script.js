@@ -1,7 +1,8 @@
 /* ===== Supabase Config ===== */
-const SUPABASE_URL = window.__KANBAN_CONFIG__?.url ?? '__SUPABASE_URL__';
-const SUPABASE_ANON_KEY = window.__KANBAN_CONFIG__?.key ?? '__SUPABASE_ANON_KEY__';
-const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const db = supabase.createClient(
+  'https://ptphnhjrmtuxphaluffn.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB0cGhuaGpybXR1eHBoYWx1ZmZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1NjYxMTYsImV4cCI6MjA5NDE0MjExNn0.19PSe_Sr6o5vm-NcomSY6HHWbM3JOwNajKmoOBerKYg'
+);
 
 /* ===== Constants ===== */
 const COLUMNS = ['todo', 'in-progress', 'done'];
